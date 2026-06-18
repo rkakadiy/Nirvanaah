@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 import {
   ArrowUpRight,
@@ -8,10 +9,9 @@ import {
   MapPin,
   Phone,
   Sparkles,
-  Star,
   UtensilsCrossed
 } from "lucide-react";
-import { brand, cateringPackages, contactCopy, flavorColumns, giftCardCopy, locations, menuCategories, menuHighlightCopy, novelties, orderFields, signatureDesserts, storyMoments, trustStats, whyPoints } from "@/data/site";
+import { brand, cateringPackages, contactCopy, flavorColumns, giftCardCopy, locations, menuCategories, menuHighlightCopy, novelties, signatureDesserts, storyMoments, trustStats, visualAssets, whyPoints } from "@/data/site";
 import { MagneticButton } from "@/components/magnetic-button";
 import { HeroScene } from "@/components/hero-scene";
 import { InquiryForm } from "@/components/inquiry-form";
@@ -78,6 +78,33 @@ function SoftCard({
       {icon ? <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[rgba(246,183,60,0.14)]">{icon}</div> : null}
       <h3 className="font-display text-2xl text-[var(--chocolate)] dark:text-[var(--ink)]">{title}</h3>
       <p className="mt-3 text-sm leading-7 text-black/68 dark:text-white/70">{description}</p>
+    </article>
+  );
+}
+
+function DessertVisualCard({
+  title,
+  description,
+  image,
+  className,
+  tall = false
+}: {
+  title: string;
+  description: string;
+  image: string;
+  className?: string;
+  tall?: boolean;
+}) {
+  return (
+    <article className={cn("glass premium-border overflow-hidden rounded-[2rem] p-3", className)} data-reveal>
+      <div className={cn("relative overflow-hidden rounded-[1.6rem]", tall ? "aspect-[4/5]" : "aspect-[4/3]")}>
+        <Image src={image} alt={title} fill className="object-cover transition duration-700 hover:scale-[1.04]" />
+      </div>
+      <div className="px-2 pb-2 pt-4">
+        <p className="text-[0.65rem] uppercase tracking-[0.24em] text-black/45 dark:text-white/45">Visual set</p>
+        <h3 className="mt-2 font-display text-2xl text-[var(--chocolate)] dark:text-[var(--ink)]">{title}</h3>
+        <p className="mt-2 text-sm leading-7 text-black/66 dark:text-white/68">{description}</p>
+      </div>
     </article>
   );
 }
@@ -163,6 +190,30 @@ function FlavorJourney() {
   );
 }
 
+function AssetGallery() {
+  return (
+    <section className="space-y-8">
+      <SectionHeading
+        eyebrow="Image Set"
+        title="A polished dessert imagery set for the premium rebuild."
+        copy="These locally generated assets give the site a true visual system that can be reused across hero, product, and conversion sections."
+      />
+      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {visualAssets.map((asset, index) => (
+          <DessertVisualCard
+            key={asset.title}
+            title={asset.title}
+            description={asset.description}
+            image={asset.image}
+            tall={index === 0 || index === 4}
+            className={index === 0 ? "md:col-span-2 xl:col-span-1" : ""}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function SignatureDesserts() {
   return (
     <section className="space-y-8">
@@ -173,11 +224,12 @@ function SignatureDesserts() {
       />
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {signatureDesserts.map((item, index) => (
-          <SoftCard
+          <DessertVisualCard
             key={item.title}
             title={item.title}
             description={item.description}
-            icon={<Sparkles className="h-4 w-4" />}
+            image={item.image}
+            tall={index === 0 || index === 4}
             className={index === 0 ? "md:col-span-2 xl:col-span-1" : ""}
           />
         ))}
@@ -608,7 +660,7 @@ export function SiteSections({ slug }: SiteSectionsProps) {
     return (
       <>
         <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
-          <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="space-y-7" data-reveal>
               <p className="text-xs uppercase tracking-[0.32em] text-black/45 dark:text-white/45">Modern Indian luxury</p>
               <div className="space-y-4">
@@ -654,6 +706,7 @@ export function SiteSections({ slug }: SiteSectionsProps) {
         </div>
 
         <div className="mx-auto max-w-7xl space-y-24 px-4 py-24 sm:px-6 lg:px-8">
+          <AssetGallery />
           <StorySection />
           <FlavorJourney />
           <SignatureDesserts />

@@ -192,31 +192,71 @@ export const cateringPackages = [
 export const signatureDesserts = [
   {
     title: "Falooda Kulfi",
-    description: "Traditional kulfi, rabri, noodles and basil seeds in one indulgent ritual."
+    description: "Traditional kulfi, rabri, noodles and basil seeds in one indulgent ritual.",
+    image: "/assets/falooda-kulfi.png"
   },
   {
     title: "Cassata",
-    description: "The original three-layered ice cream cake, elevated like a jewel box."
+    description: "The original three-layered ice cream cake, elevated like a jewel box.",
+    image: "/assets/cassata-cake.png"
   },
   {
     title: "Kulfi",
-    description: "Choice of malai, Kesar pista or Kesar in a pristine, handcrafted finish."
+    description: "Choice of malai, Kesar pista or Kesar in a pristine, handcrafted finish.",
+    image: "/assets/hero-kulfi.png"
   },
   {
     title: "Badshahi Falooda",
-    description: "Rose petal shake crowned with noodles, basil seeds and malai kulfi."
+    description: "Rose petal shake crowned with noodles, basil seeds and malai kulfi.",
+    image: "/assets/badshahi-falooda.png"
   },
   {
     title: "Ice Cream Cakes",
-    description: "Celebration-ready centerpieces for birthdays, milestones and gifting."
+    description: "Celebration-ready centerpieces for birthdays, milestones and gifting.",
+    image: "/assets/birthday-cake.png"
   },
   {
     title: "Shakes",
-    description: "Mango, vanilla, Kesar pista and custom flavor blends."
+    description: "Mango, vanilla, Kesar pista and custom flavor blends.",
+    image: "/assets/shake-swirls.png"
   },
   {
     title: "Sundaes",
-    description: "Strawberry-Mango Surprise, Nutti Tutti Fruitee, Chocolate Nirvana and more."
+    description: "Strawberry-Mango Surprise, Nutti Tutti Fruitee, Chocolate Nirvana and more.",
+    image: "/assets/sundae-nirvana.png"
+  }
+];
+
+export const visualAssets = [
+  {
+    title: "Hero Kulfi",
+    description: "A saffron-forward kulfi portrait for the home hero.",
+    image: "/assets/hero-kulfi.png"
+  },
+  {
+    title: "Falooda Kulfi",
+    description: "A layered falooda scene with rabri, noodles and pistachio garnish.",
+    image: "/assets/falooda-kulfi.png"
+  },
+  {
+    title: "Cassata Cake",
+    description: "A celebratory three-layer ice cream cake with jewel-tone accents.",
+    image: "/assets/cassata-cake.png"
+  },
+  {
+    title: "Sundae Nirvana",
+    description: "A premium sundae bowl with fruit, nuts and chocolate gloss.",
+    image: "/assets/sundae-nirvana.png"
+  },
+  {
+    title: "Birthday Cake",
+    description: "A festive birthday cake with candles and confetti energy.",
+    image: "/assets/birthday-cake.png"
+  },
+  {
+    title: "Ingredients",
+    description: "Pistachios, almonds, rose petals and saffron strands in motion.",
+    image: "/assets/ingredients-texture.png"
   }
 ];
 

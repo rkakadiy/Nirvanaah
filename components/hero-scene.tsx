@@ -1,13 +1,14 @@
+import Image from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-type FloatingNode = {
+type FloatingCardProps = {
   className: string;
-  style: CSSProperties;
+  style?: CSSProperties;
   children: ReactNode;
 };
 
-function FloatingNode({ className, style, children }: FloatingNode) {
+function FloatingCard({ className, style, children }: FloatingCardProps) {
   return (
     <div
       className={cn("absolute animate-float will-change-transform", className)}
@@ -19,56 +20,103 @@ function FloatingNode({ className, style, children }: FloatingNode) {
   );
 }
 
+function ImageCard({
+  src,
+  title,
+  subtitle,
+  className,
+  imageClassName = "object-cover"
+}: {
+  src: string;
+  title: string;
+  subtitle: string;
+  className?: string;
+  imageClassName?: string;
+}) {
+  return (
+    <div className={cn("glass relative overflow-hidden rounded-[2rem] border border-white/30 shadow-2xl", className)}>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.22),transparent_32%),radial-gradient(circle_at_70%_70%,rgba(246,183,60,0.12),transparent_32%)]" />
+      <div className="relative aspect-[4/5] overflow-hidden">
+        <Image src={src} alt="" fill className={imageClassName} priority />
+      </div>
+      <div className="absolute inset-x-0 bottom-0 border-t border-white/30 bg-[linear-gradient(180deg,rgba(255,248,240,0.22),rgba(255,248,240,0.78))] px-4 py-3 backdrop-blur-md">
+        <p className="text-[0.65rem] uppercase tracking-[0.24em] text-black/45">{subtitle}</p>
+        <p className="mt-1 font-display text-2xl text-[var(--chocolate)]">{title}</p>
+      </div>
+    </div>
+  );
+}
+
 export function HeroScene() {
   return (
-    <div className="hero-tilt relative isolate h-[32rem] overflow-hidden rounded-[2.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,248,240,0.96),rgba(255,241,226,0.84))] shadow-[0_30px_100px_rgba(58,36,24,0.18)] md:h-[42rem]">
+    <div className="hero-tilt relative isolate min-h-[34rem] overflow-hidden rounded-[2.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,248,240,0.96),rgba(255,241,226,0.84))] shadow-[0_30px_100px_rgba(58,36,24,0.18)] md:min-h-[44rem]">
       <div
         className="absolute inset-0 liquid-gradient opacity-90 mix-blend-soft-light animate-shimmer"
         data-liquid
       />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(255,255,255,0.75),transparent_28%),radial-gradient(circle_at_30%_20%,rgba(246,183,60,0.18),transparent_20%),radial-gradient(circle_at_75%_70%,rgba(244,209,209,0.18),transparent_24%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(255,255,255,0.82),transparent_28%),radial-gradient(circle_at_30%_20%,rgba(246,183,60,0.18),transparent_20%),radial-gradient(circle_at_75%_70%,rgba(244,209,209,0.18),transparent_24%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(255,248,240,0.18)_15%,rgba(255,248,240,0.62)_100%)]" />
 
-      <FloatingNode className="left-[8%] top-[18%]" style={{ animationDelay: "-2s" }}>
-        <div className="relative h-28 w-20 rotate-[-12deg]">
-          <div className="absolute inset-x-5 bottom-0 h-24 rounded-t-[1.4rem] rounded-b-[1.8rem] bg-[linear-gradient(180deg,#fff3e0,#f6b73c)] shadow-lg shadow-black/10" />
-          <div className="absolute inset-x-[34%] bottom-2 h-14 rounded-t-full bg-[linear-gradient(180deg,#f4d1d1,#fff)] opacity-90" />
-          <div className="absolute left-1/2 top-0 h-9 w-9 -translate-x-1/2 rounded-full bg-[linear-gradient(180deg,#fff7ed,#f4d1d1)] shadow-inner" />
-        </div>
-      </FloatingNode>
+      <FloatingCard className="left-[5%] top-[12%]" style={{ animationDelay: "-2s" }}>
+        <ImageCard
+          src="/assets/ingredients-texture.png"
+          title="Ingredients"
+          subtitle="Texture study"
+          className="h-44 w-36 rotate-[-10deg]"
+          imageClassName="object-cover"
+        />
+      </FloatingCard>
 
-      <FloatingNode className="right-[9%] top-[14%]" style={{ animationDelay: "-5s" }}>
-        <div className="grid h-28 w-28 place-items-center rounded-full bg-[radial-gradient(circle_at_35%_35%,rgba(255,255,255,0.9),rgba(246,183,60,0.7))] shadow-2xl shadow-black/10">
-          <div className="h-20 w-20 rounded-full border border-white/60 bg-[radial-gradient(circle_at_32%_30%,rgba(255,255,255,0.8),rgba(184,216,168,0.9))]" />
-        </div>
-      </FloatingNode>
+      <FloatingCard className="right-[6%] top-[12%]" style={{ animationDelay: "-4s" }}>
+        <ImageCard
+          src="/assets/falooda-kulfi.png"
+          title="Falooda Kulfi"
+          subtitle="Signature pour"
+          className="h-52 w-40 rotate-[8deg]"
+          imageClassName="object-cover"
+        />
+      </FloatingCard>
 
-      <FloatingNode className="left-[12%] bottom-[14%]" style={{ animationDelay: "-4s" }}>
-        <div className="rounded-[2rem] border border-white/40 bg-[rgba(255,255,255,0.62)] px-5 py-4 shadow-xl backdrop-blur-md">
-          <p className="text-[0.65rem] uppercase tracking-[0.28em] text-black/45">Flavor of the month</p>
-          <p className="mt-2 font-display text-2xl text-[var(--chocolate)]">Mango Pomegranate</p>
-          <p className="mt-1 max-w-[12rem] text-sm leading-6 text-black/60">Bright, silky and perfectly aligned with the brand&apos;s fruit-led storytelling.</p>
-        </div>
-      </FloatingNode>
+      <FloatingCard className="left-[8%] bottom-[10%]" style={{ animationDelay: "-5s" }}>
+        <ImageCard
+          src="/assets/sundae-nirvana.png"
+          title="Sundae"
+          subtitle="Nirvana bowl"
+          className="h-52 w-40 rotate-[6deg]"
+          imageClassName="object-cover"
+        />
+      </FloatingCard>
 
-      <FloatingNode className="right-[13%] bottom-[10%]" style={{ animationDelay: "-3s" }}>
-        <div className="flex items-center gap-3 rounded-[2rem] border border-white/40 bg-[rgba(58,36,24,0.8)] px-5 py-4 text-[var(--cream)] shadow-2xl backdrop-blur-md">
-          <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[rgba(246,183,60,0.18)]">
-            <span className="h-6 w-6 rounded-full bg-[linear-gradient(180deg,#fff7ed,#f4d1d1)]" />
+      <FloatingCard className="right-[10%] bottom-[8%]" style={{ animationDelay: "-3s" }}>
+        <ImageCard
+          src="/assets/birthday-cake.png"
+          title="Celebration"
+          subtitle="Birthday cake"
+          className="h-52 w-40 rotate-[-7deg]"
+          imageClassName="object-cover"
+        />
+      </FloatingCard>
+
+      <div className="absolute left-1/2 top-[48%] w-[70%] -translate-x-1/2 -translate-y-1/2">
+        <div className="glass premium-border relative overflow-hidden rounded-[2.4rem] p-4 shadow-2xl">
+          <div className="relative aspect-[16/12] overflow-hidden rounded-[1.8rem]">
+            <Image
+              src="/assets/hero-kulfi.png"
+              alt=""
+              fill
+              priority
+              className="object-cover"
+            />
           </div>
-          <div>
-            <p className="text-xs uppercase tracking-[0.22em] text-white/55">Signature</p>
-            <p className="font-display text-xl">Falooda Kulfi</p>
+          <div className="absolute left-6 top-6 rounded-full border border-white/40 bg-white/70 px-4 py-2 text-xs uppercase tracking-[0.24em] text-black/50 backdrop-blur-md">
+            Authentic Indian desserts
+          </div>
+          <div className="absolute bottom-6 left-6 rounded-[1.4rem] border border-white/40 bg-[rgba(255,248,240,0.82)] px-4 py-3 backdrop-blur-md">
+            <p className="text-[0.65rem] uppercase tracking-[0.24em] text-black/45">Hero dessert</p>
+            <p className="mt-1 font-display text-2xl text-[var(--chocolate)]">Pure Bliss</p>
           </div>
         </div>
-      </FloatingNode>
-
-      <FloatingNode className="left-[50%] top-[11%]" style={{ animationDelay: "-6s" }}>
-        <div className="flex h-20 w-52 -translate-x-1/2 items-center justify-center gap-3 rounded-full border border-white/40 bg-[rgba(255,255,255,0.72)] px-5 shadow-lg backdrop-blur-md">
-          <span className="h-3 w-20 rounded-full bg-[rgba(246,183,60,0.75)]" />
-          <span className="h-3 w-3 rounded-full bg-[rgba(184,216,168,0.95)]" />
-          <span className="h-3 w-16 rounded-full bg-[rgba(244,209,209,0.85)]" />
-        </div>
-      </FloatingNode>
+      </div>
 
       <div className="absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,transparent,rgba(255,248,240,0.92))] dark:bg-[linear-gradient(180deg,transparent,rgba(18,18,18,0.96))]" />
     </div>
